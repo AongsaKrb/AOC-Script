@@ -30,15 +30,15 @@ local descendants = {}
 local function run()
 	pcall(function()
 		descendants = {}
-		
+
 		for _, v in pairs(game:GetService("Workspace").QuestDebris:GetDescendants()) do
 			table.insert(descendants, v)
 		end
-		
+
 		for _, v in pairs(workspace.Game.CollectablesFolder:GetDescendants()) do
 			table.insert(descendants, v)
 		end
-		
+
 		for _, v in pairs(descendants) do
 			if v.Name == "FallenPresent" or v.Name == "FallenCandyCane" then
 				for i, v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
@@ -68,13 +68,28 @@ local function run()
 						task.wait(1)
 					end
 				end
-			elseif v.Name == "Coin" or v.Name == "Galactic Coin" or v.Name == "Universal Coin" or v.Name == "StarCoin" or v.Name == "Exotic Essense" or v.Name == "Vivalesce" or v.Name == "Gold Dust" or v.Name == "Silva's Drink" or v.Name == "Devastator" or v.Name == "Shards of Somber" or v.Name == "Heaven's Gift" or v.Name == "Relic of Distorgon" or v.Name == "Sorrow Essence" or v.Name == "Energy Disk" or v.Name == "Luck Potion" then
-				hum.CFrame = v.CFrame + Vector3.new(0,1,0)
-				for i, v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
-					if v:IsA("BasePart") and v.CanCollide == true then
-						v.CanCollide = false
-					end
+			elseif v.Name ~= "FallenPresent" and v.Name ~= "FallenCandyCane" and v:IsA("Model") then
+				local pn = v:GetPivot()
+				if v:GetDescendants("Prompt") then
+					hum.Anchored = false
+					hum:PivotTo(pn)
+					fireproximityprompt(v.Prompt)
+					wait(0.1)
+					fireproximityprompt(v.Prompt)
+					fireproximityprompt(v.Prompt)
+					fireproximityprompt(v.Prompt)
+					fireproximityprompt(v.Prompt)
+					fireproximityprompt(v.Prompt)
+					fireproximityprompt(v.Prompt)
+					fireproximityprompt(v.Prompt)
+					hum.Anchored = true
+					wait()
+					fireproximityprompt(v.Prompt)
+					wait()
+					hum.Anchored = false
+					task.wait(1)
 				end
+			elseif v:IsA("Part") then
 				if v:GetDescendants("Prompt") then
 					hum.Anchored = false
 					hum.CFrame = v.CFrame + Vector3.new(0,3,0)
@@ -94,7 +109,16 @@ local function run()
 					hum.Anchored = false
 					task.wait(1)
 				end
+			else
+				print("IDK.")
 			end
+			hum.CFrame = v.CFrame + Vector3.new(0,1,0)
+			for i, v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
+				if v:IsA("BasePart") and v.CanCollide == true then
+					v.CanCollide = false
+				end
+			end
+
 		end
 	end)
 	wait(4)
