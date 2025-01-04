@@ -110,7 +110,9 @@ local function run()
 					task.wait(1)
 				end
 			else
-				print("IDK.")
+				print("IDK." + "Part Name :" + v.Name)
+				wait(3)
+				v:Destroy()
 			end
 			hum.CFrame = v.CFrame + Vector3.new(0,1,0)
 			for i, v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
