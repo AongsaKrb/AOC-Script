@@ -68,7 +68,7 @@ local function run()
 						task.wait(1)
 					end
 				end
-			elseif v.Name ~= "FallenPresent" and v.Name ~= "FallenCandyCane" and v:IsA("Model") then
+			elseif v.Name ~= "FallenPresent" and v.Name ~= "FallenCandyCane" and v.Name ~= "Snowman" and v.Name ~= "Tophat" and v.Name ~= "RealCarrot" and v:IsA("Model") then
 				local pn = v:GetPivot()
 				if v:GetDescendants("Prompt") then
 					hum.Anchored = false
