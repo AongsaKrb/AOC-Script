@@ -1,0 +1,150 @@
+game:GetService("StarterGui"):SetCore("SendNotification",{
+	Title = "Script Run!", -- Required
+	Text = "This Script Made By : AMAX",
+	Icon = "rbxassetid://103050700792131",
+	Duration = 3
+})
+
+wait(3)
+
+game:GetService("StarterGui"):SetCore("SendNotification",{
+	Title = "STOP - START.", -- Required
+	Text = "TO START PLEASE PRESS >>Q<< AND TO STOP PRESS >>Q<< AGAIN.",
+	Icon = "rbxassetid://103050700792131",
+	Duration = 10
+})
+
+game:GetService("StarterGui"):SetCore("SendNotification",{
+	Title = "( MOBILE & SOME EMULATOR )", -- Required
+	Text = "PLEASE USE THE KEYBOARD SCRIPT IF YOU NOT HAVE OR CAN'T PRESS THE 'Q' BUTTON",
+	Icon = "rbxassetid://103050700792131",
+	Duration = 10
+})
+
+local uis = game:GetService("UserInputService")
+local ply = game:GetService("Players").LocalPlayer
+local chara = ply.Character
+local hum = chara:FindFirstChild("HumanoidRootPart")
+local descendants = {}
+
+local function run()
+	pcall(function()
+		descendants = {}
+		
+		for _, v in pairs(game:GetService("Workspace").QuestDebris:GetDescendants()) do
+			table.insert(descendants, v)
+		end
+		
+		for _, v in pairs(workspace.Game.CollectablesFolder:GetDescendants()) do
+			table.insert(descendants, v)
+		end
+		
+		for _, v in pairs(descendants) do
+			if v.Name == "FallenPresent" or v.Name == "FallenCandyCane" then
+				for i, v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
+					if v:IsA("BasePart") and v.CanCollide == true then
+						v.CanCollide = false
+					end
+				end
+				local pp = v:GetPivot()
+				for i, p in pairs(v:GetDescendants()) do
+					if p.Name == "Prompt" then
+						p.HoldDuration = 0
+						wait(0.5)
+						hum:PivotTo(pp)
+						fireproximityprompt(p)
+						wait(3)
+						fireproximityprompt(p)
+						wait(1)
+						hum.Anchored = true
+						chara:PivotTo(pp)
+						wait(0.1)
+						fireproximityprompt(p)
+						hum.Anchored = false
+						chara:PivotTo(pp)
+						hum.Position = hum.Position + Vector3(0,3,0)
+						wait(0.5)
+						fireproximityprompt(p)
+						task.wait(1)
+					end
+				end
+			elseif v.Name == "Coin" or v.Name == "Galactic Coin" or v.Name == "Universal Coin" or v.Name == "StarCoin" or v.Name == "Exotic Essense" or v.Name == "Vivalesce" or v.Name == "Gold Dust" or v.Name == "Silva's Drink" or v.Name == "Devastator" or v.Name == "Shards of Somber" or v.Name == "Heaven's Gift" or v.Name == "Relic of Distorgon" or v.Name == "Sorrow Essence" or v.Name == "Energy Disk" or v.Name == "Luck Potion" then
+				hum.CFrame = v.CFrame + Vector3.new(0,1,0)
+				for i, v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
+					if v:IsA("BasePart") and v.CanCollide == true then
+						v.CanCollide = false
+					end
+				end
+				if v:GetDescendants("Prompt") then
+					hum.Anchored = false
+					hum.CFrame = v.CFrame + Vector3.new(0,3,0)
+					fireproximityprompt(v.Prompt)
+					wait(0.1)
+					fireproximityprompt(v.Prompt)
+					fireproximityprompt(v.Prompt)
+					fireproximityprompt(v.Prompt)
+					fireproximityprompt(v.Prompt)
+					fireproximityprompt(v.Prompt)
+					fireproximityprompt(v.Prompt)
+					fireproximityprompt(v.Prompt)
+					hum.Anchored = true
+					wait()
+					fireproximityprompt(v.Prompt)
+					wait()
+					hum.Anchored = false
+					task.wait(1)
+				end
+			end
+		end
+	end)
+	wait(4)
+end
+
+
+local gg = nil
+
+local lastPosition = hum.Position
+
+local function savePosition()
+	lastPosition = hum.Position
+end
+
+local function rr(ip)
+	if ip.KeyCode == Enum.KeyCode.Q then
+		if gg == nil then
+			print("on")
+			gg = true
+			workspace.Gravity = 10
+			while gg do
+				run()
+				wait(0.5)
+				if gg == false then
+					gg = nil
+					break
+				end
+			end
+			return
+		elseif gg == true then
+			print("off")
+			gg = false
+			hum.Anchored = true
+			wait(0.1)
+			hum.Anchored = false
+			wait(1)
+			workspace.Gravity = 140
+			for i, v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
+				if v:IsA("BasePart") and v.CanCollide == false then
+					v.CanCollide = true
+				end
+			end
+			savePosition()
+		end
+	end
+end
+
+local success, errorMessage = pcall(run)
+if not success then
+	print("Error: " .. errorMessage)
+end
+
+uis.InputBegan:Connect(rr)
