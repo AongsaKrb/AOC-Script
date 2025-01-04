@@ -28,7 +28,7 @@ local hum = chara:FindFirstChild("HumanoidRootPart")
 local descendants = {}
 local at = {
 	"Coin", "Galactic Coin",
-	"Universal Coin", "StarCoin", "Exotic Essense", "Vivalesce",
+	"Universal Coin", "StarCoin", "Exotic Essence", "Vivalesce",
 	"Gold Dust", "Silva's Drink", "Devastator", "Shards of Somber",
 	"Heaven's Gift", "Relic of Distorgon", "Sorrow Essence",
 	"Energy Disk", "Luck Potion", "Haste Potion", "Energy Disk",
@@ -84,11 +84,10 @@ local function run()
 					end
 				end
 				if v:IsA("Model") then
-					local mp = v:GetPivot()
+					local mp = v:GetPivot() + Vector3.new(0,3,0)
 					if v:GetDescendants("Prompt") then
 						hum.Anchored = false
 						hum:PivotTo(mp)
-						hum.Position = hum.Position + Vector3.new(0,3,0)
 						fireproximityprompt(v.Prompt)
 						wait(0.1)
 						fireproximityprompt(v.Prompt)
@@ -124,11 +123,11 @@ local function run()
 						wait()
 						hum.Anchored = false
 						task.wait(1)
+						end
 					end
 				end
 			end
-		end
-	end)
+		end)
 	wait(4)
 end
 
