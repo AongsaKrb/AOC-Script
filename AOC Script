@@ -110,7 +110,7 @@ local function run()
 					task.wait(1)
 				end
 			else
-				print("IDK." + "Part Name :" + v.Name)
+				print("IDK.", "Part Name :", v.Name)
 				wait(3)
 				v:Destroy()
 			end
